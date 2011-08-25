@@ -74,7 +74,7 @@ module CASServer::CAS
   def generate_proxy_granting_ticket(pgt_url, st)
     uri = URI.parse(pgt_url)
     https = Net::HTTP.new(uri.host,uri.port)
-    https.use_ssl = true
+    https.use_ssl = false
 
     # Here's what's going on here:
     #
