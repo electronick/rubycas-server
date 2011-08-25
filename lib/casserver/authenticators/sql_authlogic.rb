@@ -66,7 +66,7 @@ class CASServer::Authenticators::SQLAuthlogic < CASServer::Authenticators::SQL
       encryptor = Authlogic::CryptoProviders::Sha512
     end
 
-    @options[:encryptor_options].each do |name, value|
+    (@options[:encryptor_options] || []).each do |name, value|
       encryptor.send("#{name}=", value) if encryptor.respond_to?("#{name}=")
     end
 
