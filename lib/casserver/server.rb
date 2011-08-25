@@ -654,6 +654,7 @@ module CASServer
     get "#{uri_path}/proxyValidate" do
       CASServer::Utils::log_controller_action(self.class, params)
 
+      $LOG.info '1'
       # required
       @service = clean_service_url(params['service'])
       @ticket = params['ticket']
@@ -663,11 +664,14 @@ module CASServer
 
       @proxies = []
 
+      $LOG.info '2'
       t, @error = validate_proxy_ticket(@service, @ticket)
       @success = t && !@error
 
+      $LOG.info '3'
       @extra_attributes = {}
       if @success
+        $LOG.info '4'
         @username = t.username
 
         if t.kind_of? CASServer::Model::ProxyTicket
@@ -675,12 +679,18 @@ module CASServer
         end
 
         if @pgt_url
+          $LOG.info '5'
           pgt = generate_proxy_granting_ticket(@pgt_url, t)
+          $LOG.info '6'
           @pgtiou = pgt.iou if pgt
         end
 
+
+
         @extra_attributes = t.granted_by_tgt.extra_attributes || {}
       end
+
+$LOG.info '7'
 
       $LOG.info "error #{@error.inspect}"
 
