@@ -96,7 +96,7 @@ module CASServer::CAS
       # FIXME: The CAS protocol spec says to use 'pgt' as the parameter, but in practice
       #         the JA-SIG and Yale server implementations use pgtId. We'll go with the
       #         in-practice standard.
-      path += (uri.query.nil? || uri.query.empty? ? '?' : '&') + "pgtId=#{pgt.ticket}&pgtIou=#{pgt.iou}"
+      path += (uri.query.nil? || uri.query.empty? ? '?' : '&') + "pgtId=#{pgt.ticket}&pgtIou=#{pgt.iou}&pgt=#{pgt.ticket}"
 
       response = conn.request_get(path)
       # TODO: follow redirects... 2.5.4 says that redirects MAY be followed
