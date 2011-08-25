@@ -682,8 +682,11 @@ module CASServer
         @extra_attributes = t.granted_by_tgt.extra_attributes || {}
       end
 
+      $LOG.info "error #{@error.inspect}"
+
       status response_status_from_error(@error) if @error
 
+      $LOG.info 'ok'
      render :builder, :proxy_validate
     end
 
