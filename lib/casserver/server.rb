@@ -336,9 +336,9 @@ module CASServer
             service_with_ticket = service_uri_with_ticket(@service, st)
             $LOG.info("User '#{tgt.username}' authenticated based on ticket granting cookie. Redirecting to service '#{@service}'.")
             redirect service_with_ticket, 303 # response code 303 means "See Other" (see Appendix B in CAS Protocol spec)
-#          elsif @gateway
-#            $LOG.info("Redirecting unauthenticated gateway request to service '#{@service}'.")
-#            redirect @service, 303
+          elsif @gateway
+            $LOG.info("Redirecting unauthenticated gateway request to service '#{@service}'.")
+            redirect @service, 303
           else
             $LOG.info("Proceeding with CAS login for service #{@service.inspect}.")
           end
